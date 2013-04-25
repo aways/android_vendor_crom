@@ -16,5 +16,5 @@
 
 <!-- This feature shows that this is LiquidSmooth based -->
 <permissions>
-    <feature name="com.liquidsmooth.android" />
+    <feature name="com.crom.android" />
 </permissions>
