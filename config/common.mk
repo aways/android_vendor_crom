@@ -1,7 +1,7 @@
 SUPERUSER_EMBEDDED := true
 
 # brand
-PRODUCT_BRAND ?= Carbon
+PRODUCT_BRAND ?= C-RoM Mix
 
 # overrides
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -63,41 +63,41 @@ PRODUCT_PACKAGES += \
     start-ssh
 
 # themes
-include vendor/carbon/config/theme_chooser.mk
+include vendor/crom/config/theme_chooser.mk
 
 #korean
 $(call inherit-product-if-exists, external/naver-fonts/fonts.mk)
 
 # overlay
-PRODUCT_PACKAGE_OVERLAYS += vendor/carbon/overlay/dictionaries
-PRODUCT_PACKAGE_OVERLAYS += vendor/carbon/overlay/common
+PRODUCT_PACKAGE_OVERLAYS += vendor/crom/overlay/dictionaries
+PRODUCT_PACKAGE_OVERLAYS += vendor/crom/overlay/common
 
 # bin
 PRODUCT_COPY_FILES += \
-    vendor/carbon/prebuilt/common/bin/sysinit:system/bin/sysinit
+    vendor/crom/prebuilt/common/bin/sysinit:system/bin/sysinit
 
 # etc
 PRODUCT_COPY_FILES += \
-    vendor/carbon/prebuilt/common/etc/init.carbon.rc:root/init.carbon.rc
+    vendor/crom/prebuilt/common/etc/init.crom.rc:root/init.crom.rc
 
 # initd
 PRODUCT_COPY_FILES += \
-    vendor/carbon/prebuilt/common/etc/init.d/98tweaks:system/etc/init.d/98tweaks
+    vendor/crom/prebuilt/common/etc/init.d/98tweaks:system/etc/init.d/98tweaks
 
 # prebuilt
 PRODUCT_COPY_FILES += \
-    vendor/carbon/prebuilt/common/xbin/sysro:system/xbin/sysro \
-    vendor/carbon/prebuilt/common/xbin/sysrw:system/xbin/sysrw \
-    vendor/carbon/prebuilt/common/media/LMprec_508.emd:system/media/LMprec_508.emd \
-    vendor/carbon/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
+    vendor/crom/prebuilt/common/xbin/sysro:system/xbin/sysro \
+    vendor/crom/prebuilt/common/xbin/sysrw:system/xbin/sysrw \
+    vendor/crom/prebuilt/common/media/LMprec_508.emd:system/media/LMprec_508.emd \
+    vendor/crom/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
 
 #backup tool
-CARBON_BUILD = true
+crom_BUILD = true
 PRODUCT_COPY_FILES += \
-    vendor/carbon/prebuilt/common/bin/backuptool.sh:system/bin/backuptool.sh \
-    vendor/carbon/prebuilt/common/bin/backuptool.functions:system/bin/backuptool.functions \
-    vendor/carbon/prebuilt/common/bin/50-carbon.sh:system/addon.d/50-carbon.sh \
-    vendor/carbon/prebuilt/common/bin/blacklist:system/addon.d/blacklist
+    vendor/crom/prebuilt/common/bin/backuptool.sh:system/bin/backuptool.sh \
+    vendor/crom/prebuilt/common/bin/backuptool.functions:system/bin/backuptool.functions \
+    vendor/crom/prebuilt/common/bin/50-crom.sh:system/addon.d/50-crom.sh \
+    vendor/crom/prebuilt/common/bin/blacklist:system/addon.d/blacklist
 
 # sip/voip
 PRODUCT_COPY_FILES += \
@@ -105,32 +105,19 @@ PRODUCT_COPY_FILES += \
 
 # nfc
 PRODUCT_COPY_FILES += \
-    vendor/carbon/config/permissions/com.carbon.android.xml:system/etc/permissions/com.carbon.android.xml \
-    vendor/carbon/config/permissions/com.carbon.nfc.enhanced.xml:system/etc/permissions/com.carbon.nfc.enhanced.xml
+    vendor/crom/config/permissions/com.crom.android.xml:system/etc/permissions/com.crom.android.xml \
+    vendor/crom/config/permissions/com.crom.nfc.enhanced.xml:system/etc/permissions/com.crom.nfc.enhanced.xml
 
 # version
 RELEASE = false
-CARBON_VERSION_MAJOR = 1
-CARBON_VERSION_MINOR = 6
+crom_VERSION_MAJOR = 19
+crom_VERSION_MINOR = 0
 
 ifeq ($(RELEASE),true)
-    CARBON_VERSION := "CARBON-JB-v"$(CARBON_VERSION_MAJOR).$(CARBON_VERSION_MINOR)
+    crom_VERSION := "C-RoM_Mix_v"$(crom_VERSION_MAJOR).$(crom_VERSION_MINOR)
 else
-    CARBON_VERSION := "CARBON-JB-EXP"-$(shell date +%Y%m%d-%H%M%S)
-endif
-
-# goo.im properties
-ifeq ($(RELEASE),true)
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ro.goo.rom=carbonjb2 \
-        ro.goo.developerid=carbon \
-        ro.goo.version=$(shell date +%Y%m%d)
-else
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ro.goo.rom=carbonjb2exp \
-        ro.goo.developerid=carbon \
-        ro.goo.version=$(shell date +%Y%m%d)
+    crom_VERSION := "C-RoM_Mix_v-"-$(shell date +%Y%m%d-%H%M%S)
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
-  ro.carbon.version=$(CARBON_VERSION)
+  ro.crom.version=$(crom_VERSION)

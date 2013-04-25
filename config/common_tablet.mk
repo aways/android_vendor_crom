@@ -2,11 +2,11 @@
 include frameworks/base/data/sounds/NewAudio.mk
 
 # common
-$(call inherit-product, vendor/carbon/config/common.mk)
+$(call inherit-product, vendor/crom/config/common.mk)
 
 # gps
 PRODUCT_COPY_FILES += \
-    vendor/carbon/prebuilt/common/etc/gps.conf:system/etc/gps.conf
+    vendor/crom/prebuilt/common/etc/gps.conf:system/etc/gps.conf
 
 # bluetooth
 PRODUCT_COPY_FILES += \
@@ -14,7 +14,7 @@ PRODUCT_COPY_FILES += \
 
 # media
 #PRODUCT_COPY_FILES += \
-#    vendor/carbon/prebuilt/common/media/xhdpi/bootanimation.zip:system/media/bootanimation.zip
+#    vendor/crom/prebuilt/common/media/xhdpi/bootanimation.zip:system/media/bootanimation.zip
 
 # ringtones
 PRODUCT_PROPERTY_OVERRIDES += \

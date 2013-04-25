@@ -1,4 +1,4 @@
-# Carbon Extras
+# C-RoM Extras
 
 on init
     export ANDROID_CACHE /cache
