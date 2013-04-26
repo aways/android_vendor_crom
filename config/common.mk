@@ -29,10 +29,9 @@ PRODUCT_PACKAGES += \
     PhaseBeam \
     BlueBalls \
     PhotoTable \
-    Torch \
     Superuser \
     su \
-    Wallpapers
+    CRoMWallpapers
 
 # prebuilts
 PRODUCT_PACKAGES += \
@@ -78,7 +77,8 @@ PRODUCT_COPY_FILES += \
 
 # etc
 PRODUCT_COPY_FILES += \
-    vendor/crom/prebuilt/common/etc/init.crom.rc:root/init.crom.rc
+    vendor/crom/prebuilt/common/etc/init.crom.rc:root/init.crom.rc \
+    vendor/crom/prebuilt/common/etc/resolv.conf:system/etc/resolv.conf
 
 # initd
 PRODUCT_COPY_FILES += \
@@ -102,11 +102,6 @@ PRODUCT_COPY_FILES += \
 # sip/voip
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
-
-# nfc
-PRODUCT_COPY_FILES += \
-    vendor/crom/config/permissions/com.crom.android.xml:system/etc/permissions/com.crom.android.xml \
-    vendor/crom/config/permissions/com.crom.nfc.enhanced.xml:system/etc/permissions/com.crom.nfc.enhanced.xml
 
 # version
 RELEASE = false
