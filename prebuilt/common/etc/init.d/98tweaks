@@ -1,6 +1,16 @@
 #!/system/xbin/sh
 # imoseyon mods
 
+# some proven tweaks from GamerzROM
+# tweaked ondemand is best for battery and performance on sgs
+echo ondemand > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+echo 20000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+echo 40 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
+echo 20 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
+echo 1 /sys/devices/system/cpu/cpufreq/ondemand/smooth_ui
+# 200mhz min step consuming lesser battery and gives more performance than 100mhz
+echo 200000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+
 # file system speedups
 busybox mount -o remount,noatime,barrier=0,nobh /system
 busybox mount -o remount,noatime /data
