@@ -63,6 +63,9 @@ PRODUCT_PACKAGES += \
     ssh-keygen \
     start-ssh
 
+# languages
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+
 # themes
 include vendor/crom/config/theme_chooser.mk
 
