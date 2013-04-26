@@ -17,6 +17,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # packages
 PRODUCT_PACKAGES += \
     Apollo \
+    Calendar \
     Camera \
     CMFileManager \
     DashClock \
