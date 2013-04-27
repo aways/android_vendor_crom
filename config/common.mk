@@ -27,9 +27,9 @@ PRODUCT_PACKAGES += \
     Launcher2 \
     LiveWallpapersPicker \
     NoiseField \
+    PermissionsManager \
     PhaseBeam \
     BlueBalls \
-    PermissionsManager \
     PhotoTable \
     Superuser \
     su \
