@@ -29,6 +29,7 @@ PRODUCT_PACKAGES += \
     NoiseField \
     PhaseBeam \
     BlueBalls \
+    PermissionsManager \
     PhotoTable \
     Superuser \
     su \
