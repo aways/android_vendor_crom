@@ -35,6 +35,12 @@ PRODUCT_PACKAGES += \
     su \
     CRoMWallpapers
 
+# CM Packages
+PRODUCT_PACKAGES += \
+    audio_effects.conf \
+    DSPManager \
+    libcyanogen-dsp
+
 # prebuilts
 PRODUCT_PACKAGES += \
     GooManager \
@@ -114,9 +120,9 @@ crom_VERSION_MAJOR = 19
 crom_VERSION_MINOR = 0
 
 ifeq ($(RELEASE),true)
-    crom_VERSION := "C-RoM-Mix_v"$(crom_VERSION_MAJOR).$(crom_VERSION_MINOR)
+    crom_VERSION := "C-RoM_Mix_v"$(crom_VERSION_MAJOR).$(crom_VERSION_MINOR)
 else
-    crom_VERSION := "C-RoM-Mix_v-"-$(shell date +%Y%m%d-%H%M%S)
+    crom_VERSION := "C-RoM_Mix_v-"-$(shell date +%Y%m%d-%H%M%S)
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
