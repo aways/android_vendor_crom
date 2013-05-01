@@ -112,8 +112,8 @@ PRODUCT_COPY_FILES += \
 
 # Installer
 PRODUCT_COPY_FILES += \
-    vendor/carbon/prebuilt/common/bin/persist.sh:install/bin/persist.sh \
-    vendor/carbon/prebuilt/common/etc/persist.conf:system/etc/persist.conf
+    vendor/crom/prebuilt/common/bin/persist.sh:install/bin/persist.sh \
+    vendor/crom/prebuilt/common/etc/persist.conf:system/etc/persist.conf
 
 # sip/voip
 PRODUCT_COPY_FILES += \
