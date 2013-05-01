@@ -33,7 +33,8 @@ PRODUCT_PACKAGES += \
     PhotoTable \
     Superuser \
     su \
-    CRoMWallpapers
+    CRoMWallpapers \
+    Welcome
 
 # CM Packages
 PRODUCT_PACKAGES += \
