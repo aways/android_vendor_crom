@@ -96,6 +96,14 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/crom/prebuilt/common/etc/init.d/98tweaks:system/etc/init.d/98tweaks
 
+# build.prop tweaks
+PRODUCT_PROPERTY_OVERRIDES += \
+  ro.kernel.android.checkjni=0 \
+  ro.media.enc.jpeg.quality=100 \
+  debug.sf.hw=1 \
+  video.accelerate.hw=1 \
+  ro.kernel.checkjni=0
+
 # prebuilt
 PRODUCT_COPY_FILES += \
     vendor/crom/prebuilt/common/xbin/sysro:system/xbin/sysro \
