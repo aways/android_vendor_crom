@@ -130,14 +130,9 @@ PRODUCT_COPY_FILES += \
 
 # version
 RELEASE = false
-crom_VERSION_MAJOR = 19
-crom_VERSION_MINOR = 0
-
-ifeq ($(RELEASE),true)
-    crom_VERSION := "C-RoM_Mix_v"$(crom_VERSION_MAJOR).$(crom_VERSION_MINOR)
-else
-    crom_VERSION := "C-RoM_Mix_v-"-$(shell date +%Y%m%d-%H%M%S)
-endif
+CROM_VERSION_MAJOR = 20
+CROM_VERSION_MINOR = 0
+CROM_VERSION := "C-RoM_Mix_v"$(CROM_VERSION_MAJOR).$(CROM_VERSION_MINOR)
 
 PRODUCT_PROPERTY_OVERRIDES += \
-  ro.crom.version=$(crom_VERSION)
+  ro.crom.version=$(CROM_VERSION)
