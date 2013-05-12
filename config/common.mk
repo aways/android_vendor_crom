@@ -24,7 +24,6 @@ PRODUCT_PACKAGES += \
     Galaxy4 \
     HoloSpiralWallpaper \
     LiveWallpapers \
-    Launcher2 \
     LiveWallpapersPicker \
     NoiseField \
     PermissionsManager \
@@ -33,6 +32,7 @@ PRODUCT_PACKAGES += \
     PhotoTable \
     Superuser \
     su \
+    Trebuchet \
     CRoMWallpapers \
     Welcome
 
