@@ -89,11 +89,15 @@ PRODUCT_COPY_FILES += \
 # etc
 PRODUCT_COPY_FILES += \
     vendor/crom/prebuilt/common/etc/init.crom.rc:root/init.crom.rc \
-    vendor/crom/prebuilt/common/etc/resolv.conf:system/etc/resolv.conf
+    vendor/crom/prebuilt/common/etc/liberty.bsh:system/etc/liberty.bsh \
+    vendor/crom/prebuilt/common/etc/resolv.conf:system/etc/resolv.conf \
+    vendor/crom/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf
 
 # initd
 PRODUCT_COPY_FILES += \
-    vendor/crom/prebuilt/common/etc/init.d/98tweaks:system/etc/init.d/98tweaks
+    vendor/crom/prebuilt/common/etc/init.d/98tweaks:system/etc/init.d/98tweaks \
+    vendor/crom/prebuilt/common/etc/init.d/03lagFixer:system/etc/init.d/03lagFixer \
+    vendor/crom/prebuilt/common/etc/init.d/09cron:system/etc/init.d/09cron
 
 # build.prop tweaks
 PRODUCT_PROPERTY_OVERRIDES += \

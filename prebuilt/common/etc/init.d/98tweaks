@@ -1,66 +1,13 @@
-#!/system/xbin/sh
-# imoseyon mods
+#!/system/bin/ash
+#!/system/bin/sh
 
-# file system speedups
-busybox mount -o remount,noatime,barrier=0,nobh /system
-busybox mount -o remount,noatime /data
-busybox mount -o remount,noatime,barrier=0,nobh /cache
+. /system/etc/liberty.bsh
 
-# drop garbage in caches
-busybox rm -f /cache/*.apk
-busybox rm -f /cache/*.tmp
-busybox rm -f /data/dalvik-cache/*.apk
-busybox rm -f /data/dalvik-cache/*.tmp
+mount -o remount,rw,noatime,nodiratime /system
 
-#Defrags database files
-
-VAC_LOG_FILE=/data/S50-vacuum-databases.log
-
-# do nothing if less than 5 days
-find $VAC_LOG_FILE -type f -mtime +5 -exec rm '{}' \;
-
-if ! test -f $VAC_LOG_FILE; then
-
-	touch $VAC_LOG_FILE
-
-	busybox mount -o rw,remount /
-
-	if [ -e $VAC_LOG_FILE ]; then
-		rm $VAC_LOG_FILE;
-	fi;
-    	
-	echo "Starting Sqlite Vacuum $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $VAC_LOG_FILE;
-
-	for i in \
-	`find /data -iname "*.db"`
-	do \
-		sqlite3 $i 'VACUUM;'; 
-		echo Vacuum $i  | tee -a $VAC_LOG_FILE;
-	done;
-
-	for i in \
-	`find /dbdata -iname "*.db"`
-	do \
-		sqlite3 $i 'VACUUM;'; 
-		echo Vacuum $i  | tee -a $VAC_LOG_FILE;
-	done;
-
-	for i in \
-	`find /sdcard -iname "*.db"`
-	do \
-		sqlite3 $i 'VACUUM;'; 
-		echo Vacuum $i  | tee -a $VAC_LOG_FILE;
-	done
-
-	echo "Sqlite Vacuum finished at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $VAC_LOG_FILE;
-
-fi
-
-# zipalign
-
-
-ZIP_LOG_FILE=/data/log/zipalign.log;
-ZIPALIGNED_APK=/data/local/zipalignedapk;
+# Always zipalign
+ZIP_LOG_FILE=/data/zipalign.log;
+ZIPALIGNED_APK=/data/zipalig.db;
 
 if [ -e $ZIP_LOG_FILE ]; then
 	rm $ZIP_LOG_FILE;
@@ -72,7 +19,7 @@ if [ ! -f $ZIPALIGNED_APK ]; then
 	touch $ZIPALIGNED_APK;
 fi;
 
-echo "Automatic ZipAlign started at $( date +"%m-%d-%Y %H:%M:%S" ) " | tee -a $ZiP_LOG_FILE;
+echo "Automatic ZipAlign started at $( date +"%m-%d-%Y %H:%M:%S" ) " | tee -a $ZIP_LOG_FILE;
 
 for DIR in /system/app /data/app; do
 	cd $DIR;
@@ -89,11 +36,9 @@ for DIR in /system/app /data/app; do
 				echo "Now aligning: $DIR/$APK" | tee -a $ZIP_LOG_FILE;
 				/system/xbin/zipalign -v -f 4 $APK /data/$APK;
 				sync
-				busybox mount -o rw,remount /system;
 				cp -f -p /data/$APK $APK;
 				rm /data/$APK;
 				if [ -e /data/$APK ]; then
-					sleep 2;
 					rm /data/$APK;
 					if [ -e /data/$APK ]; then
 						echo "Failed to remove APK. Run the tweak again : /data/$APK" | tee -a $ZIP_LOG_FILE;
@@ -114,7 +59,85 @@ for DIR in /system/app /data/app; do
 	done;
 done;
 sync
-busybox mount -o ro,remount /system;
-busybox mount -o ro,remount /;
-touch $ZIPALIGNED_APK;
-echo "Automatic ZipAlign finished at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $ZIP_LOG_FILE;
+
+# Enable Syscntl
+if [ -e "/system/etc/sysctl.conf" ]; then
+  sysctl -p /system/etc/sysctl.conf
+fi
+
+# Fix Permissions
+fix_permissions
+
+# Enable Cron
+# crond has "/bin/sh" hardcoded
+mount -o remount,rw rootfs /
+if busybox [ ! -L /bin ]; then
+    ln -s /system/bin/ /bin
+fi
+mount -o remount,ro rootfs /
+
+# set timezone (if you're not between -0500 and -0800 you get PST)
+# todo - support other timezones
+timezone=`date +%z`
+if busybox [ $timezone = "-0800" ]; then
+    TZ=PST8PDT
+elif busybox [ $timezone = "-0700" ]; then
+    TZ=MST7MDT
+elif busybox [ $timezone = "-0600" ]; then
+    TZ=CST6CDT
+elif busybox [ $timezone = "-0500" ]; then
+    TZ=EST5EDT
+else
+    TZ=PST8PDT
+fi
+export TZ
+
+# use /data/cron, call the crontab file "root"
+if busybox [ ! -d /data/cron ]; then
+    busybox mkdir -p /data/cron
+    cat > /data/cron/root << EOF
+# run-parts
+01 * * * * busybox run-parts /system/etc/cron/cron.hourly
+02 4 * * * busybox run-parts /system/etc/cron/cron.daily
+03 4 * * 0 busybox run-parts /system/etc/cron/cron.weekly
+EOF
+fi
+busybox crond -c /data/cron
+
+mount -o remount,rw rootfs /
+
+# Read Ahead
+if [ -e "/sys/devices/virtual/bdi/179:0/read_ahead_kb" ]; then
+        echo "1024" > /sys/devices/virtual/bdi/179:0/read_ahead_kb;
+fi
+
+# etc
+busybox echo "0" > /proc/sys/net/ipv6/conf/all/forwarding
+busybox echo "0" > /proc/sys/net/ipv4/tcp_timestamps
+busybox echo "1" > /proc/sys/net/ipv4/tcp_no_metrics_save
+busybox echo "1" > /proc/sys/net/ipv4/tcp_tw_reuse;
+busybox echo "1" > /proc/sys/net/ipv4/tcp_sack;
+busybox echo "1" > /proc/sys/net/ipv4/tcp_tw_recycle;
+busybox echo "1" > /proc/sys/net/ipv4/tcp_window_scaling;
+busybox echo "5" > /proc/sys/net/ipv4/tcp_keepalive_probes;
+busybox echo "30" > /proc/sys/net/ipv4/tcp_keepalive_intvl;
+echo "10" > /proc/sys/fs/lease-break-time
+
+# VM
+echo "2500" > /proc/sys/vm/dirty_expire_centisecs;
+echo "300" > /proc/sys/vm/dirty_writeback_centisecs;
+echo "8192" > /proc/sys/vm/min_free_kbytes;
+echo "1" > /proc/sys/vm/oom_kill_allocating_task;
+echo "0" > /proc/sys/vm/panic_on_oom;
+echo "70" > /proc/sys/vm/dirty_background_ratio;
+echo "90" > /proc/sys/vm/dirty_ratio;
+echo "5" > /proc/sys/vm/vfs_cache_pressure;
+echo "0" > /proc/sys/vm/overcommit_memory;
+echo "4" > /proc/sys/vm/min_free_order_shift;
+echo "0" > /proc/sys/vm/laptop_mode;
+echo "0" > /proc/sys/vm/block_dump;
+echo "0" > /proc/sys/vm/oom_dump_tasks;
+echo "3" > /proc/sys/vm/drop_caches;
+
+mount -o remount,ro rootfs /
+mount -o remount,ro,noatime,nodiratime /system
