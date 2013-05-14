@@ -93,7 +93,11 @@ PRODUCT_COPY_FILES += \
 
 # initd
 PRODUCT_COPY_FILES += \
-    vendor/crom/prebuilt/common/etc/init.d/98tweaks:system/etc/init.d/98tweaks
+    vendor/crom/prebuilt/common/etc/init.d/00crom:system/etc/init.d/00crom \
+    vendor/crom/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit \
+    vendor/crom/prebuilt/common/etc/init.d/98tweaks:system/etc/init.d/98tweaks \
+    vendor/crom/prebuilt/common/etc/liberty.bsh:system/etc/liberty.bsh \
+    vendor/crom/prebuilt/common/etc/init_trigger.disabled:system/etc/init_trigger.disabled \
 
 # build.prop tweaks
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -103,6 +107,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
   pm.sleep_mode=1 \
   video.accelerate.hw=1 \
   persist.sys.root_access=3
+
+# Compcache/Zram support
+PRODUCT_COPY_FILES += \
+    vendor/crom/prebuilt/common/bin/compcache:system/bin/compcache \
+    vendor/crom/prebuilt/common/bin/handle_compcache:system/bin/handle_compcache
 
 # prebuilt
 PRODUCT_COPY_FILES += \
@@ -118,6 +127,11 @@ PRODUCT_COPY_FILES += \
     vendor/crom/prebuilt/common/bin/backuptool.functions:system/bin/backuptool.functions \
     vendor/crom/prebuilt/common/bin/50-crom.sh:system/addon.d/50-crom.sh \
     vendor/crom/prebuilt/common/bin/blacklist:system/addon.d/blacklist
+
+# Don't export PS1 in /system/etc/mkshrc.
+PRODUCT_COPY_FILES += \
+    vendor/crom/prebuilt/common/etc/mkshrc:system/etc/mkshrc \
+    vendor/crom/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf
 
 # sip/voip
 PRODUCT_COPY_FILES += \
