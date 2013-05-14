@@ -86,7 +86,7 @@ OUTFILE=$OUT/$MODVERSION-$TARGET_PRODUCT_FINAL.zip
 # Delete Offline charging mode files
 ( cd $REPACK/ota/system/media; echo $DELETE_MEDIA | xargs rm -f; )
 
-if [ "$TARGET_PRODUCT_FINAL" != "infuse4g" ]
+if [ "$TARGET_PRODUCT_FINAL" != "galaxysmtd" ]
 then
 # No need for modem.bin
 rm -f $REPACK/ota/modem.bin
