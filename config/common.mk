@@ -21,7 +21,7 @@ PRODUCT_PACKAGES += \
     Camera \
     CMFileManager \
     DashClock \
-    FMRadio \
+    FmRadio \
     Galaxy4 \
     HoloSpiralWallpaper \
     LiveWallpapers \
