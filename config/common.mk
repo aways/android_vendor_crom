@@ -21,6 +21,7 @@ PRODUCT_PACKAGES += \
     Camera \
     CMFileManager \
     DashClock \
+    FMRadio \
     Galaxy4 \
     HoloSpiralWallpaper \
     LiveWallpapers \
@@ -33,8 +34,7 @@ PRODUCT_PACKAGES += \
     Superuser \
     su \
     Trebuchet \
-    CRoMWallpapers \
-    Welcome
+    CRoMWallpapers
 
 # CM Packages
 PRODUCT_PACKAGES += \
@@ -44,7 +44,6 @@ PRODUCT_PACKAGES += \
 
 # prebuilts
 PRODUCT_PACKAGES += \
-    GooManager \
     LatinIME \
     LockClock 
 
