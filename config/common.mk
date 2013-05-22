@@ -100,14 +100,9 @@ PRODUCT_COPY_FILES += \
 # build.prop tweaks
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.kernel.android.checkjni=0 \
-  ro.kernel.checkjni=0 \
-  ro.ril.disable.power.collapse=0 \
-  ro.vold.umsdirtyratio=20 \
   ro.media.enc.jpeg.quality=100 \
-  ro.min.fling_velocity=10000 \
-  ro.max.fling_velocity=15000 \
   debug.sf.hw=1 \
-  pm.sleep_mode=0 \
+  pm.sleep_mode=1 \
   video.accelerate.hw=1 \
   persist.sys.root_access=3
 
