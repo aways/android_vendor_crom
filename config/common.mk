@@ -32,7 +32,6 @@ PRODUCT_PACKAGES += \
     PhotoTable \
     Superuser \
     su \
-    Trebuchet \
     CRoMWallpapers
 
 # CM Packages
@@ -66,6 +65,10 @@ PRODUCT_PACKAGES += \
     sshd_config \
     ssh-keygen \
     start-ssh
+
+# launcher
+PRODUCT_COPY_FILES += \
+    vendor/crom/proprietary/NovaLauncher/NovaLauncher.apk:system/app/NovaLauncher.apk
 
 # languages
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
@@ -102,7 +105,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
   ro.kernel.android.checkjni=0 \
   ro.media.enc.jpeg.quality=100 \
   debug.sf.hw=1 \
-  pm.sleep_mode=1 \
+  pm.sleep_mode=0 \
   video.accelerate.hw=1 \
   persist.sys.root_access=3
 
