@@ -133,7 +133,9 @@ PRODUCT_COPY_FILES += \
     vendor/crom/prebuilt/common/bin/backuptool.sh:system/bin/backuptool.sh \
     vendor/crom/prebuilt/common/bin/backuptool.functions:system/bin/backuptool.functions \
     vendor/crom/prebuilt/common/bin/50-crom.sh:system/addon.d/50-crom.sh \
-    vendor/crom/prebuilt/common/bin/blacklist:system/addon.d/blacklist
+    vendor/crom/prebuilt/common/bin/blacklist:system/addon.d/blacklist \
+    vendor/crom/prebuilt/common/bin/99-backup.sh:system/addon.d/99-backup.sh \
+    vendor/crom/prebuilt/common/etc/backup.conf:system/etc/backup.conf
 
 # Don't export PS1 in /system/etc/mkshrc.
 PRODUCT_COPY_FILES += \
