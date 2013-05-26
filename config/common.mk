@@ -71,6 +71,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     vendor/crom/proprietary/NovaLauncher/NovaLauncher.apk:system/app/NovaLauncher.apk
 
+# Update Me
+PRODUCT_COPY_FILES += \
+    vendor/crom/proprietary/UpdateMe/UpdateMe.apk:system/app/UpdateMe.apk
+
 # languages
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
