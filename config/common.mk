@@ -20,7 +20,6 @@ PRODUCT_PACKAGES += \
     Calendar \
     Camera \
     CMFileManager \
-    CRoMWallpapers \
     DashClock \
     Galaxy4 \
     HoloSpiralWallpaper \
@@ -33,7 +32,7 @@ PRODUCT_PACKAGES += \
     PhotoTable \
     Superuser \
     su \
-    Trebuchet
+    CRoMWallpapers
 
 # CM Packages
 PRODUCT_PACKAGES += \
