@@ -20,8 +20,10 @@ PRODUCT_PACKAGES += \
     Calendar \
     Camera \
     CMFileManager \
+    CRoMWallpapers \
     DashClock \
     Galaxy4 \
+    HALO \
     HoloSpiralWallpaper \
     LiveWallpapers \
     LiveWallpapersPicker \
@@ -31,8 +33,7 @@ PRODUCT_PACKAGES += \
     BlueBalls \
     PhotoTable \
     Superuser \
-    su \
-    CRoMWallpapers
+    su
 
 # CM Packages
 PRODUCT_PACKAGES += \
@@ -144,8 +145,8 @@ PRODUCT_COPY_FILES += \
 
 # version
 RELEASE = false
-CROM_VERSION_MAJOR = 23
-CROM_VERSION_MINOR = 5
+CROM_VERSION_MAJOR = 24
+CROM_VERSION_MINOR = 0
 CROM_VERSION := "C-RoM_Mix_v"$(CROM_VERSION_MAJOR).$(CROM_VERSION_MINOR)
 
 PRODUCT_PROPERTY_OVERRIDES += \
