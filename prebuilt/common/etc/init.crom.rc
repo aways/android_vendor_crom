@@ -1,4 +1,4 @@
-# Extras
+# C-RoM Extras
 
 on init
     export ANDROID_CACHE /cache
@@ -10,6 +10,9 @@ on post-fs-data
     chown system system /cache/dalvik-cache
     chmod 0771 /cache/dalvik-cache
     mkdir /data/.ssh 0750 root shell
+
+    # Run sysinit
+    start sysinit
 
 on boot
     chown system system /sys/block/mmcblk0/queue/scheduler
@@ -29,6 +32,7 @@ on boot
 on property:service.adb.tcp.port=5555
     stop adbd
     start adbd
+
 on property:service.adb.tcp.port=-1
     stop adbd
     start adbd
@@ -39,3 +43,9 @@ service compcache /system/bin/handle_compcache
     user root
     group root
     oneshot
+
+# sysinit (/system/etc/init.d)
+service sysinit /system/bin/sysinit
+    user root
+    oneshot
+    disabled
