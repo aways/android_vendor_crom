@@ -32,7 +32,8 @@ DELETE_FONTS="MTLmr3m.ttf"
 DELETE_MEDIA="*.qmg"
 
 REPACK=$OUT/repack.d
-printf "Sanitizing Environment..."
+echo
+echo -e $CL_CYN"Sanitizing Environment..."$CL_RST
 rm -rf $REPACK
 mkdir -p $REPACK
 echo
@@ -41,7 +42,7 @@ echo
 mkdir $REPACK/ota
 (
 cd $REPACK/ota
-printf "Unpacking $OTAPACKAGE..."
+echo -e "Unpacking "$CL_CYN""$OTAPACKAGE""$CL_RST"..."
 unzip $QUIET $OTAPACKAGE
 echo
 
@@ -74,7 +75,7 @@ $SED -i \
 # Determine what to name the new signed package
 MODVERSION=`sed -n -e'/ro\.crom\.version/s/^.*=//p' $OUT/system/build.prop`
 TARGET_PRODUCT_FINAL=`echo $TARGET_PRODUCT | cut -d '_' -f2`
-echo $CL_CYN"MODVERSION: $MODVERSION"$CL_RST
+echo -e $CL_CYN"MODVERSION: $MODVERSION"$CL_RST
 OUTFILE=$OUT/$MODVERSION-$TARGET_PRODUCT_FINAL.zip
 
 # Delete unnecessary binaries
@@ -113,17 +114,19 @@ rm -rf $REPACK/ota/system/etc/recovery-resource.dat
 #	find $REPACK/ota/system/lib/modules -name "*.ko" -print0 | xargs -0 arm-eabi-strip --strip-unneeded
 
 # Pack it up and sign
-printf "Zipping package..."
+echo
+echo -e $CL_YLW"Zipping package..."$CL_RST
+echo
 ( cd $REPACK/ota; zip $QUIET -r $REPACK/update.zip . )
 echo
-printf "Signing package..."
+echo -e $CL_BLU"Signing package..."$CL_RST
 SECURITYDIR=$ANDROID_BUILD_TOP/build/target/product/security
 java -Xmx1024m \
 	-jar $OUT/../../../host/$OUT_TARGET_HOST/framework/signapk.jar \
 	-w $SECURITYDIR/testkey.x509.pem $SECURITYDIR/testkey.pk8 \
 	$REPACK/update.zip $OUTFILE
 echo
-printf "Cleaning up..."
+echo -e $CL_MAG"Cleaning up..."$CL_RST
 rm -rf $REPACK
 echo
 
@@ -133,8 +136,10 @@ img=`basename $OUTFILE`
 cd `dirname $OUTFILE`
 $MD5 $img >$img.md5sum
 echo
-echo $CL_GRN"Package complete: $OUTFILE"$CL_RST
-echo $CL_GRN"md5: $(cat $img.md5sum | awk '{ print $1 }')"$CL_RST
+echo -e "  ※=====================================================================================================================※   "
+echo -e "  "$CL_RED"Package complete"$CL_RST" : "$CL_CYN"$OUTFILE "$CL_RST
+echo -e "  "$CL_RED"MD5"$CL_RST" : "$CL_MAG"`cat $img.md5` "$CL_RST
+echo -e "  ※=====================================================================================================================※   "
 echo
 )
 

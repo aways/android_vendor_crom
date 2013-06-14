@@ -82,7 +82,7 @@ fi
 if [ -e "$1" ];
 then
     NAME=`basename $1`;
-    echo $CL_YLW"Optimize:"$CL_RST" $NAME..";
+    echo "Optimizing "$CL_YLW""$NAME"..."$CL_RST;
 
     if [ "$2" != "" ];
     then
