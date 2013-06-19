@@ -127,7 +127,7 @@ PRODUCT_COPY_FILES += \
     vendor/crom/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
 
 #backup tool
-crom_BUILD = true
+CROM_BUILD = true
 PRODUCT_COPY_FILES += \
     vendor/crom/prebuilt/common/bin/backuptool.sh:system/bin/backuptool.sh \
     vendor/crom/prebuilt/common/bin/backuptool.functions:system/bin/backuptool.functions \
