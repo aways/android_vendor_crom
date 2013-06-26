@@ -99,7 +99,7 @@ PRODUCT_COPY_FILES += \
 
 # initd
 PRODUCT_COPY_FILES += \
-    vendor/crom/prebuilt/common/etc/init.d/00crom:system/etc/init.d/00crom \
+    vendor/crom/prebuilt/common/etc/init.d/S99smoothness:system/etc/init.d/S99smoothness \
     vendor/crom/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit \
     vendor/crom/prebuilt/common/etc/init.d/98tweaks:system/etc/init.d/98tweaks \
     vendor/crom/prebuilt/common/etc/liberty.bsh:system/etc/liberty.bsh \
