@@ -32,6 +32,7 @@ PRODUCT_PACKAGES += \
     PhaseBeam \
     BlueBalls \
     PhotoTable \
+    SunBeam \
     Superuser \
     su
 
