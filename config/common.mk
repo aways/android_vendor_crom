@@ -146,6 +146,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
+TARGET_USE_O3 := true
+
 # version
 RELEASE = false
 CROM_VERSION_MAJOR = 28
