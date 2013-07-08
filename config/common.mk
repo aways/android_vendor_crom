@@ -54,9 +54,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     armzipalign \
     e2fsck \
+    fsck.exfat \
     mke2fs \
     tune2fs \
-    nano
+    mkfs.exfat \
+    mount.exfat \
+    nano \
+    ntfsfix \
+    ntfs-3g
+
 	
 # Openssh
 PRODUCT_PACKAGES += \
