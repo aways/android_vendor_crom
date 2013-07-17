@@ -63,7 +63,7 @@ PRODUCT_PACKAGES += \
     ntfsfix \
     ntfs-3g
 
-	
+
 # Openssh
 PRODUCT_PACKAGES += \
     scp \
@@ -110,7 +110,11 @@ PRODUCT_COPY_FILES += \
     vendor/crom/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit \
     vendor/crom/prebuilt/common/etc/init.d/98tweaks:system/etc/init.d/98tweaks \
     vendor/crom/prebuilt/common/etc/liberty.bsh:system/etc/liberty.bsh \
-    vendor/crom/prebuilt/common/etc/init_trigger.disabled:system/etc/init_trigger.disabled \
+    vendor/crom/prebuilt/common/etc/init_trigger.disabled:system/etc/init_trigger.disabled
+
+# SELinux filesystem labels
+PRODUCT_COPY_FILES += \
+    vendor/crom/prebuilt/common/etc/init.d/50selinuxrelabel:system/etc/init.d/50selinuxrelabel
 
 # build.prop tweaks
 PRODUCT_PROPERTY_OVERRIDES += \
