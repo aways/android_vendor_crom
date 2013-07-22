@@ -17,7 +17,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # packages
 PRODUCT_PACKAGES += \
     Apollo \
-    Babel \
     Calendar \
     Camera \
     CMFileManager \
@@ -35,7 +34,8 @@ PRODUCT_PACKAGES += \
     PhotoTable \
     SunBeam \
     Superuser \
-    su
+    su \
+    VoicePlus
 
 # CM Packages
 PRODUCT_PACKAGES += \
