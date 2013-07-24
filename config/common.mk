@@ -79,6 +79,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     vendor/crom/proprietary/NovaLauncher/NovaLauncher.apk:system/app/NovaLauncher.apk
 
+# RomStats
+PRODUCT_COPY_FILES += \
+    vendor/crom/proprietary/RomStats/RomStats.apk:system/app/RomStats.apk
+
 # Update Me
 PRODUCT_COPY_FILES += \
     vendor/crom/proprietary/UpdateMe/UpdateMe.apk:system/app/UpdateMe.apk
@@ -125,6 +129,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
   pm.sleep_mode=0 \
   video.accelerate.hw=1 \
   persist.sys.root_access=3
+
+# ROM Statistics and ROM Identification
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.romstats.url=http://stats.c-rom.biz/stats \
+ro.romstats.name=C-RoM \
+ro.romstats.version=$(CROM_VERSION)
 
 # Compcache/Zram support
 PRODUCT_COPY_FILES += \
